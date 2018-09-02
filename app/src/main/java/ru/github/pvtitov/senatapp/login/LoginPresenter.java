@@ -30,4 +30,9 @@ public class LoginPresenter extends MvpContract.BasicPresenter<LoginView, LoginM
             view.shutDown();
         }
     }
+
+    @Override
+    public void onError(String message) {
+        getView().showMessage(message);
+    }
 }

@@ -4,14 +4,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class AuthRequest {
+
     @SerializedName("username")
     @Expose
     private String username;
-
     @SerializedName("password")
     @Expose
     private String password;
-
     @SerializedName("rememberMe")
     @Expose
     private boolean rememberMe;
@@ -39,4 +38,5 @@ public class AuthRequest {
     public void setRememberMe(boolean rememberMe) {
         this.rememberMe = rememberMe;
     }
+
 }

@@ -8,5 +8,6 @@ public interface LoginModel extends MvpContract.Model{
 
     interface AuthListener {
         void onSuccess();
+        void onError(String message);
     }
 }
