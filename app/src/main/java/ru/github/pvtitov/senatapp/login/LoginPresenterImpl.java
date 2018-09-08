@@ -1,10 +1,8 @@
 package ru.github.pvtitov.senatapp.login;
 
-import retrofit2.Response;
 import ru.github.pvtitov.senatapp.MvpContract;
-import ru.github.pvtitov.senatapp.http_service.HttpResponseListener;
 
-public class LoginPresenterImpl extends MvpContract.BasicPresenter<LoginView, LoginModel> implements HttpResponseListener<Void> {
+public class LoginPresenterImpl extends MvpContract.BasicPresenter<LoginView, LoginModel> implements LoginModel.AuthListener {
 
     private static LoginPresenterImpl instance;
 
@@ -19,13 +17,13 @@ public class LoginPresenterImpl extends MvpContract.BasicPresenter<LoginView, Lo
     public void authorize(String login, String password) {
         LoginModel model = getModel();
         if (model != null) {
-            model.setHttpResponseListener(this);
+            model.setAuthListener(this);
             model.authorize(login, password);
         }
     }
 
     @Override
-    public void onSuccess(Response<Void> response) {
+    public void onSuccess() {
         LoginView view = getView();
         if (view != null) {
             view.saveAuthorizedState(true);

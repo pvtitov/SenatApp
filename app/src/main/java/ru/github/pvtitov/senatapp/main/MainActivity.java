@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.login.LoginActivity;
@@ -14,6 +16,7 @@ import static ru.github.pvtitov.senatapp.login.LoginActivity.IS_AUTHORIZED;
 public class MainActivity extends AppCompatActivity implements MainView {
 
     MainPresenterImpl presenter;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.attachView(this);
         presenter.setModel(new MainModelImpl());
         presenter.authStatusCheck();
+
+        button = findViewById(R.id.button);
+        button.setOnClickListener(v -> presenter.downloadMeeting());
     }
 
     @Override
@@ -55,6 +61,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public void showMessage(String message) {
-
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

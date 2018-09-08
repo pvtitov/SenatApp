@@ -1,10 +1,11 @@
 package ru.github.pvtitov.senatapp.main;
 
-import retrofit2.Response;
-import ru.github.pvtitov.senatapp.MvpContract;
-import ru.github.pvtitov.senatapp.http_service.HttpResponseListener;
+import java.util.List;
 
-public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, MainModel> implements HttpResponseListener {
+import ru.github.pvtitov.senatapp.MvpContract;
+import ru.github.pvtitov.senatapp.pojos.Meeting;
+
+public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, MainModel> implements MainModel.MeetingListener {
     private static MainPresenterImpl instance;
 
     public static MainPresenterImpl getInstance() {
@@ -22,9 +23,17 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
         }
     }
 
-    @Override
-    public void onSuccess(Response response) {
+    public void downloadMeeting() {
+        MainModel model = getModel();
+        if (model != null) {
+            model.setMeetingListener(this);
+            model.downloadMeeting();
+        }
+    }
 
+    @Override
+    public void onSuccess(Meeting meeting) {
+        getView().showMessage("onSuccess()");
     }
 
     @Override
