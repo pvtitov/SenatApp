@@ -13,19 +13,16 @@ import ru.github.pvtitov.senatapp.pojos.AuthError;
 
 public class ErrorResponseParser {
 
-    public List<String> parse(Response<?> response){
+    public void extractMessages(Response<?> response, HttpResponseListener listener){
         Converter<ResponseBody, AuthError> errorConverter = App.getRetrofit().responseBodyConverter(AuthError.class, new Annotation[0]);
         AuthError error;
         try {
             if (response.errorBody() != null) {
                 error = errorConverter.convert(response.errorBody());
-                List<String> messages = new ArrayList<>();
-                for(AuthError e: error.getErrors()) messages.add(e.getMessage());
-                return messages;
+                for(AuthError e: error.getErrors()) listener.onError(e.getMessage());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>();
     }
 }

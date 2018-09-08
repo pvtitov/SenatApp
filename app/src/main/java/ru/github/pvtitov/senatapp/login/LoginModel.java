@@ -5,5 +5,5 @@ import ru.github.pvtitov.senatapp.http_service.HttpResponseListener;
 
 public interface LoginModel extends MvpContract.Model{
     void authorize(String login, String password);
-    void setHttpResponseListener(HttpResponseListener httpResponseListener);
+    void setHttpResponseListener(HttpResponseListener<Void> httpResponseListener);
 }

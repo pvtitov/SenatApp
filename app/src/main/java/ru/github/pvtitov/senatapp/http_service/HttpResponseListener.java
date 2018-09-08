@@ -1,7 +1,9 @@
 package ru.github.pvtitov.senatapp.http_service;
 
-public interface HttpResponseListener {
+import retrofit2.Response;
 
-    void onSuccess();
+public interface HttpResponseListener<T> {
+
+    void onSuccess(Response<T> response);
     void onError(String message);
 }

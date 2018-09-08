@@ -1,8 +1,10 @@
 package ru.github.pvtitov.senatapp.main;
 
+import retrofit2.Response;
 import ru.github.pvtitov.senatapp.MvpContract;
+import ru.github.pvtitov.senatapp.http_service.HttpResponseListener;
 
-public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, MainModel> {
+public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, MainModel> implements HttpResponseListener {
     private static MainPresenterImpl instance;
 
     public static MainPresenterImpl getInstance() {
@@ -18,5 +20,15 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
         if (view != null) {
             if (!view.isAuthorized()) view.openLoginScreen();
         }
+    }
+
+    @Override
+    public void onSuccess(Response response) {
+
+    }
+
+    @Override
+    public void onError(String message) {
+
     }
 }

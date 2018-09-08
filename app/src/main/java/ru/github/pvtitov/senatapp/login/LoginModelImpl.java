@@ -15,7 +15,7 @@ import ru.github.pvtitov.senatapp.pojos.AuthRequest;
 
 public class LoginModelImpl implements LoginModel {
 
-    private HttpResponseListener httpResponseListener;
+    private HttpResponseListener<Void> httpResponseListener;
 
     @Override
     public void authorize(String login, String password) {
@@ -30,14 +30,11 @@ public class LoginModelImpl implements LoginModel {
             @Override
             public void onResponse(@NonNull Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    httpResponseListener.onSuccess();
+                    httpResponseListener.onSuccess(response);
                 }
                 else {
                     ErrorResponseParser parser = new ErrorResponseParser();
-                    List<String> errorMessages = parser.parse(response);
-                    for (String message: errorMessages) {
-                        httpResponseListener.onError(message);
-                    }
+                    parser.extractMessages(response, httpResponseListener);
                 }
             }
 
@@ -49,7 +46,7 @@ public class LoginModelImpl implements LoginModel {
     }
 
     @Override
-    public void setHttpResponseListener(HttpResponseListener httpResponseListener) {
+    public void setHttpResponseListener(HttpResponseListener<Void> httpResponseListener) {
         this.httpResponseListener = httpResponseListener;
     }
 }
