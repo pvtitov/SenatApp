@@ -1,23 +1,24 @@
 package ru.github.pvtitov.senatapp.login;
 
 import ru.github.pvtitov.senatapp.MvpContract;
+import ru.github.pvtitov.senatapp.http_service.HttpResponseListener;
 
-public class LoginPresenter extends MvpContract.BasicPresenter<LoginView, LoginModel> implements LoginModel.AuthListener {
+public class LoginPresenterImpl extends MvpContract.BasicPresenter<LoginView, LoginModel> implements HttpResponseListener {
 
-    private static LoginPresenter instance;
+    private static LoginPresenterImpl instance;
 
-    public static LoginPresenter getInstance() {
-        if (instance == null) instance = new LoginPresenter();
+    public static LoginPresenterImpl getInstance() {
+        if (instance == null) instance = new LoginPresenterImpl();
         return instance;
     }
 
-    private LoginPresenter() {
+    private LoginPresenterImpl() {
     }
 
     public void authorize(String login, String password) {
         LoginModel model = getModel();
         if (model != null) {
-            model.setAuthListener(this);
+            model.setHttpResponseListener(this);
             model.authorize(login, password);
         }
     }

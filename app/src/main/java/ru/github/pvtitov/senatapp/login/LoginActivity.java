@@ -14,14 +14,14 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     public static final String IS_AUTHORIZED = "IS_AUTHORIZED";
 
-    private LoginPresenter presenter;
+    private LoginPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        presenter = LoginPresenter.getInstance();
+        presenter = LoginPresenterImpl.getInstance();
         presenter.attachView(this);
         presenter.setModel(new LoginModelImpl());
 
