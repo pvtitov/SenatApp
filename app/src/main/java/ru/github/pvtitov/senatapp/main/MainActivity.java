@@ -1,6 +1,8 @@
 package ru.github.pvtitov.senatapp.main;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private android.support.v7.widget.Toolbar toolbar;
     private MainPresenterImpl presenter;
-    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +31,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.setModel(new MainModelImpl());
         presenter.authStatusCheck();
 
-        recyclerView = findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(presenter.getMeetingAdapter());
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(MeetingsListFragment.TAG);
+        if (fragment == null){
+            fragment = new MeetingsListFragment();
+            fragment.setRetainInstance(true);
+            fragmentManager
+                    .beginTransaction()
+                    .add(R.id.fragment_container, fragment, MeetingsListFragment.TAG)
+                    .commit();
+        }
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

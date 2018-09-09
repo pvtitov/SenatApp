@@ -8,14 +8,14 @@ import android.widget.TextView;
 
 import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.pojos.Item;
-import ru.github.pvtitov.senatapp.pojos.Meeting;
+import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingViewHolder> {
 
-    private Meeting meeting;
+    private Meetings meetings;
 
-    public MeetingAdapter(Meeting meeting) {
-        this.meeting = meeting;
+    public MeetingAdapter(Meetings meetings) {
+        this.meetings = meetings;
     }
 
     @NonNull
@@ -28,7 +28,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
     @Override
     public void onBindViewHolder(@NonNull MeetingViewHolder viewHolder, int i) {
-        Item item = meeting.getItems().get(i);
+        Item item = meetings.getItems().get(i);
         String date = "";
         if (item.getDate() != null) date = item.getDate();
         if (item.getStartDate() != null) date = item.getStartDate();
@@ -41,12 +41,12 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
     @Override
     public int getItemCount() {
-        if (meeting == null) return 0;
-        return meeting.getItems().size();
+        if (meetings == null) return 0;
+        return meetings.getItems().size();
     }
 
-    public void setMeeting(Meeting meeting) {
-        this.meeting = meeting;
+    public void setMeetings(Meetings meetings) {
+        this.meetings = meetings;
     }
 
     static class MeetingViewHolder extends RecyclerView.ViewHolder {

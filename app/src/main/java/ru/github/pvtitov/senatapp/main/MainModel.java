@@ -1,16 +1,14 @@
 package ru.github.pvtitov.senatapp.main;
 
-import java.util.List;
-
 import ru.github.pvtitov.senatapp.MvpContract;
-import ru.github.pvtitov.senatapp.pojos.Meeting;
+import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public interface MainModel extends MvpContract.Model {
-    Meeting downloadMeeting();
+    Meetings downloadMeeting();
     void setMeetingListener(MeetingListener listener);
 
     interface MeetingListener {
-        void onSuccess(Meeting meeting);
+        void onSuccess(Meetings meetings);
         void onError(String message);
     }
 }

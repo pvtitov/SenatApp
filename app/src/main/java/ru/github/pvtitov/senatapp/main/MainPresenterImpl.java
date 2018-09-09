@@ -1,13 +1,12 @@
 package ru.github.pvtitov.senatapp.main;
 
 import android.content.SharedPreferences;
-import android.support.v7.widget.RecyclerView;
 
 import java.util.HashSet;
 
 import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.MvpContract;
-import ru.github.pvtitov.senatapp.pojos.Meeting;
+import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, MainModel> implements MainModel.MeetingListener {
     private static MainPresenterImpl instance;
@@ -20,7 +19,7 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
     private MainPresenterImpl() {
     }
 
-    private Meeting meeting;
+    private Meetings meetings;
     private MeetingAdapter adapter;
 
     public void authStatusCheck() {
@@ -40,9 +39,9 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
     }
 
     @Override
-    public void onSuccess(Meeting meeting) {
-        this.meeting = meeting;
-        adapter.setMeeting(meeting);
+    public void onSuccess(Meetings meetings) {
+        this.meetings = meetings;
+        adapter.setMeetings(meetings);
         adapter.notifyDataSetChanged();
     }
 
@@ -59,7 +58,7 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
     }
 
     public MeetingAdapter getMeetingAdapter() {
-        adapter = new MeetingAdapter(meeting);
+        adapter = new MeetingAdapter(meetings);
         return adapter;
     }
 }

@@ -6,48 +6,148 @@ import com.google.gson.annotations.SerializedName;
 
 public class Meeting {
 
-    @SerializedName("pageNum")
+    @SerializedName("id")
     @Expose
-    private int pageNum;
-    @SerializedName("pageSize")
+    private String id;
+    @SerializedName("num")
     @Expose
-    private int pageSize;
-    @SerializedName("items")
+    private String num;
+    @SerializedName("status")
     @Expose
-    private List<Item> items = null;
-    @SerializedName("itemsTotal")
+    private String status;
+    @SerializedName("type")
     @Expose
-    private int itemsTotal;
+    private String type;
+    @SerializedName("date")
+    @Expose
+    private String date;
+    @SerializedName("createDate")
+    @Expose
+    private String createDate;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("head")
+    @Expose
+    private Head head;
+    @SerializedName("secretary")
+    @Expose
+    private Secretary secretary;
+    @SerializedName("agenda")
+    @Expose
+    private List<Agenda> agenda = null;
+    @SerializedName("participants")
+    @Expose
+    private List<Participant> participants = null;
+    @SerializedName("collegialBody")
+    @Expose
+    private CollegialBody collegialBody;
+    @SerializedName("hasProtocol")
+    @Expose
+    private boolean hasProtocol;
 
-    public int getPageNum() {
-        return pageNum;
+    public String getId() {
+        return id;
     }
 
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getPageSize() {
-        return pageSize;
+    public String getNum() {
+        return num;
     }
 
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setNum(String num) {
+        this.num = num;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public String getStatus() {
+        return status;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getItemsTotal() {
-        return itemsTotal;
+    public String getType() {
+        return type;
     }
 
-    public void setItemsTotal(int itemsTotal) {
-        this.itemsTotal = itemsTotal;
+    public void setType(String type) {
+        this.type = type;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Head getHead() {
+        return head;
+    }
+
+    public void setHead(Head head) {
+        this.head = head;
+    }
+
+    public Secretary getSecretary() {
+        return secretary;
+    }
+
+    public void setSecretary(Secretary secretary) {
+        this.secretary = secretary;
+    }
+
+    public List<Agenda> getAgenda() {
+        return agenda;
+    }
+
+    public void setAgenda(List<Agenda> agenda) {
+        this.agenda = agenda;
+    }
+
+    public List<Participant> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<Participant> participants) {
+        this.participants = participants;
+    }
+
+    public CollegialBody getCollegialBody() {
+        return collegialBody;
+    }
+
+    public void setCollegialBody(CollegialBody collegialBody) {
+        this.collegialBody = collegialBody;
+    }
+
+    public boolean isHasProtocol() {
+        return hasProtocol;
+    }
+
+    public void setHasProtocol(boolean hasProtocol) {
+        this.hasProtocol = hasProtocol;
+    }
+
 }

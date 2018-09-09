@@ -8,7 +8,7 @@ import retrofit2.Response;
 import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.http_service.ErrorResponseParser;
 import ru.github.pvtitov.senatapp.http_service.MeetingService;
-import ru.github.pvtitov.senatapp.pojos.Meeting;
+import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public class MainModelImpl implements MainModel {
 
@@ -16,10 +16,10 @@ public class MainModelImpl implements MainModel {
     private MeetingService service = App.getRetrofit().create(MeetingService.class);
 
     @Override
-    public Meeting downloadMeeting() {
-        service.meeting().enqueue(new Callback<Meeting>() {
+    public Meetings downloadMeeting() {
+        service.meeting().enqueue(new Callback<Meetings>() {
             @Override
-            public void onResponse(Call<Meeting> call, Response<Meeting> response) {
+            public void onResponse(Call<Meetings> call, Response<Meetings> response) {
                 if (response.isSuccessful()) {
                     meetingListener.onSuccess(response.body());
                 }
@@ -31,7 +31,7 @@ public class MainModelImpl implements MainModel {
             }
 
             @Override
-            public void onFailure(Call<Meeting> call, Throwable t) {
+            public void onFailure(Call<Meetings> call, Throwable t) {
                 meetingListener.onError(t.getMessage());
             }
         });
