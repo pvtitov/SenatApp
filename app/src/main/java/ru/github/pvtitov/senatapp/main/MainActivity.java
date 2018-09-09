@@ -1,22 +1,21 @@
 package ru.github.pvtitov.senatapp.main;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.login.LoginActivity;
 
-import static ru.github.pvtitov.senatapp.login.LoginActivity.IS_AUTHORIZED;
-
 public class MainActivity extends AppCompatActivity implements MainView {
 
-    MainPresenterImpl presenter;
-    Button button;
+    private android.support.v7.widget.Toolbar toolbar;
+    private MainPresenterImpl presenter;
+    private Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +27,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.setModel(new MainModelImpl());
         presenter.authStatusCheck();
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         button = findViewById(R.id.button);
         button.setOnClickListener(v -> presenter.downloadMeeting());
     }
@@ -36,12 +38,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     protected void onDestroy() {
         super.onDestroy();
         presenter.detachView();
-    }
-
-    @Override
-    public boolean isAuthorized(){
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        return preferences.getBoolean(IS_AUTHORIZED, false);
     }
 
     @Override
@@ -62,5 +58,23 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.login_menu_item:
+                presenter.openLoginScreeen();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }

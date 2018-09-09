@@ -4,12 +4,17 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import ru.github.pvtitov.senatapp.App;
+import ru.github.pvtitov.senatapp.http_service.AddCookiesInterceptor;
 import ru.github.pvtitov.senatapp.http_service.ErrorResponseParser;
 import ru.github.pvtitov.senatapp.http_service.LoginService;
+import ru.github.pvtitov.senatapp.http_service.ReceivedCookiesInterceptor;
 import ru.github.pvtitov.senatapp.pojos.AuthRequest;
 
 public class LoginModelImpl implements LoginModel {
@@ -19,24 +24,21 @@ public class LoginModelImpl implements LoginModel {
     @Override
     public void authorize(String login, String password) {
 
-        LoginService loginService = App.getRetrofit().create(LoginService.class);
+        LoginService loginService = initLoginService();
 
         AuthRequest authRequest = new AuthRequest();
-        authRequest.setUsername(login);
-        authRequest.setPassword(password);
-        authRequest.setRememberMe(true);
+        authRequest
+                .setUsername(login)
+                .setPassword(password)
+                .setRememberMe(true);
 
         loginService.authorize(authRequest).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    authListener.onSuccess();
+                    authListener.onLogin();
                 }
-                else {
-                    ErrorResponseParser parser = new ErrorResponseParser();
-                    List<String> errorMessages = parser.parse(response);
-                    for(String message: errorMessages) authListener.onError(message);
-                }
+                else handleErrorServerResponse(response);
             }
 
             @Override
@@ -44,6 +46,49 @@ public class LoginModelImpl implements LoginModel {
                 authListener.onError(t.getMessage());
             }
         });
+    }
+
+    private LoginService initLoginService() {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new ReceivedCookiesInterceptor())
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://senat.azurewebsites.net/")
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(LoginService.class);
+    }
+
+    @Override
+    public void logout() {
+
+        LoginService loginService = initLoginService();
+
+        loginService.logout().enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    authListener.onLogout();
+                }
+                else handleErrorServerResponse(response);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                authListener.onError(t.getMessage());
+            }
+        });
+
+    }
+
+    private void handleErrorServerResponse(Response response) {
+        ErrorResponseParser parser = new ErrorResponseParser();
+        List<String> errorMessages = parser.parse(response);
+        for(String message: errorMessages) authListener.onError(message);
     }
 
     @Override

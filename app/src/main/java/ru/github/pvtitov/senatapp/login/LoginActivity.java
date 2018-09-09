@@ -4,15 +4,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
-
-    public static final String IS_AUTHORIZED = "IS_AUTHORIZED";
 
     private LoginPresenterImpl presenter;
 
@@ -27,12 +25,17 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         EditText loginEditText = findViewById(R.id.login_edittext);
         EditText passwordEditText = findViewById(R.id.password_edittext);
-        ImageButton loginButton = findViewById(R.id.login_button);
 
+        Button loginButton = findViewById(R.id.login_button);
         loginButton.setOnClickListener(view -> {
             String login = loginEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             presenter.authorize(login, password);
+        });
+
+        Button logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(view -> {
+            presenter.logout();
         });
     }
 
@@ -40,12 +43,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     protected void onDestroy() {
         super.onDestroy();
         presenter.detachView();
-    }
-
-    @Override
-    public void saveAuthorizedState(boolean isAuthorized) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        sharedPreferences.edit().putBoolean(IS_AUTHORIZED, isAuthorized).apply();
     }
 
     @Override

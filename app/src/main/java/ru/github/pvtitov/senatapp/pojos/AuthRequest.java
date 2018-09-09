@@ -19,24 +19,27 @@ public class AuthRequest {
         return username;
     }
 
-    public void setUsername(String username) {
+    public AuthRequest setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public AuthRequest setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public boolean isRememberMe() {
         return rememberMe;
     }
 
-    public void setRememberMe(boolean rememberMe) {
+    public AuthRequest setRememberMe(boolean rememberMe) {
         this.rememberMe = rememberMe;
+        return this;
     }
 
 }

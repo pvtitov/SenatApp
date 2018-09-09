@@ -1,7 +1,10 @@
 package ru.github.pvtitov.senatapp.main;
 
-import java.util.List;
+import android.content.SharedPreferences;
 
+import java.util.HashSet;
+
+import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.MvpContract;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 
@@ -17,9 +20,10 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
     }
 
     public void authStatusCheck() {
-        MainView view = getView();
-        if (view != null) {
-            if (!view.isAuthorized()) view.openLoginScreen();
+        SharedPreferences prefs = App.getSharedPreferences();
+        if (prefs.getStringSet(App.COOKIES, new HashSet<>()).size() == 0) {
+            MainView view = getView();
+            if (view != null) view.openLoginScreen();
         }
     }
 
@@ -33,11 +37,20 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
 
     @Override
     public void onSuccess(Meeting meeting) {
-        getView().showMessage("onSuccess()");
+        getView().showMessage(
+                meeting.getItems().get(0).getCollegialBody().getName()
+        );
     }
 
     @Override
     public void onError(String message) {
 
+    }
+
+    public void openLoginScreeen() {
+        MainView view = getView();
+        if (view != null) {
+            view.openLoginScreen();
+        }
     }
 }

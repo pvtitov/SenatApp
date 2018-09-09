@@ -33,7 +33,6 @@ public class App extends Application {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new ReceivedCookiesInterceptor())
                 .addInterceptor(new AddCookiesInterceptor())
                 .build();
 

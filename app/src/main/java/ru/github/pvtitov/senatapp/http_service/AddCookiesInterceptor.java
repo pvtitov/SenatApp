@@ -1,7 +1,5 @@
 package ru.github.pvtitov.senatapp.http_service;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.util.HashSet;
 
@@ -18,7 +16,6 @@ public class AddCookiesInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
         addCookies(builder);
-        Log.d("happy", "Before adding cookies");
         return chain.proceed(builder.build());
     }
 
@@ -27,7 +24,6 @@ public class AddCookiesInterceptor implements Interceptor {
             HashSet<String> cookies = (HashSet<String>) App.getSharedPreferences().getStringSet(COOKIES, new HashSet<>());
             for (String cookie : cookies) {
                 builder.addHeader("Cookie", cookie);
-                Log.d("happy", "Cookie: " + cookie);
             }
         }
     }

@@ -1,7 +1,5 @@
 package ru.github.pvtitov.senatapp.main;
 
-import android.util.Log;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,8 +32,7 @@ public class MainModelImpl implements MainModel {
 
             @Override
             public void onFailure(Call<Meeting> call, Throwable t) {
-                Log.d("happy", t.getStackTrace().toString());
-                t.printStackTrace();
+                meetingListener.onError(t.getMessage());
             }
         });
         return null;

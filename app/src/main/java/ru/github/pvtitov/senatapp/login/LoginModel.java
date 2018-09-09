@@ -4,10 +4,12 @@ import ru.github.pvtitov.senatapp.MvpContract;
 
 public interface LoginModel extends MvpContract.Model{
     void authorize(String login, String password);
+    void logout();
     void setAuthListener(AuthListener authListener);
 
     interface AuthListener {
-        void onSuccess();
+        void onLogin();
+        void onLogout();
         void onError(String message);
     }
 }
