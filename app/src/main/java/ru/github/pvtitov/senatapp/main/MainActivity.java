@@ -5,11 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
@@ -32,13 +29,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.authStatusCheck();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(MeetingsListFragment.TAG);
+        Fragment fragment = fragmentManager.findFragmentByTag(ListMeetingsFragment.TAG);
         if (fragment == null){
-            fragment = new MeetingsListFragment();
+            fragment = new ListMeetingsFragment();
             fragment.setRetainInstance(true);
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.fragment_container, fragment, MeetingsListFragment.TAG)
+                    .add(R.id.main_fragment_container, fragment, ListMeetingsFragment.TAG)
                     .commit();
         }
 
