@@ -3,6 +3,8 @@ package ru.github.pvtitov.senatapp.main;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -15,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     private android.support.v7.widget.Toolbar toolbar;
     private MainPresenterImpl presenter;
-    private Button button;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.setModel(new MainModelImpl());
         presenter.authStatusCheck();
 
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(presenter.getMeetingAdapter());
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
 
-        button = findViewById(R.id.button);
-        button.setOnClickListener(v -> presenter.downloadMeeting());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.downloadMeeting();
     }
 
     @Override

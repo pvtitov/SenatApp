@@ -1,6 +1,7 @@
 package ru.github.pvtitov.senatapp.main;
 
 import android.content.SharedPreferences;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.HashSet;
 
@@ -18,6 +19,9 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
 
     private MainPresenterImpl() {
     }
+
+    private Meeting meeting;
+    private MeetingAdapter adapter;
 
     public void authStatusCheck() {
         SharedPreferences prefs = App.getSharedPreferences();
@@ -37,9 +41,9 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
 
     @Override
     public void onSuccess(Meeting meeting) {
-        getView().showMessage(
-                meeting.getItems().get(0).getCollegialBody().getName()
-        );
+        this.meeting = meeting;
+        adapter.setMeeting(meeting);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -52,5 +56,10 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
         if (view != null) {
             view.openLoginScreen();
         }
+    }
+
+    public MeetingAdapter getMeetingAdapter() {
+        adapter = new MeetingAdapter(meeting);
+        return adapter;
     }
 }
