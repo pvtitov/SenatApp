@@ -40,14 +40,14 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     public void onBindViewHolder(@NonNull MeetingViewHolder viewHolder, int i) {
         Item item = meetings.getItems().get(i);
         String date = "";
-        if (item.getDate() != null) date = item.getDate();
+        if (item.getId() != null) date = item.getDate();
         if (item.getStartDate() != null) date = item.getStartDate();
         if (item.getEndDate() != null) date = date + " - " + item.getEndDate();
         viewHolder.date.setText(date);
         viewHolder.holdingName.setText(item.getHolding().getName());
         viewHolder.collegialBody.setText(item.getCollegialBody().getName());
         viewHolder.status.setText(item.getStatus());
-        viewHolder.layout.setOnClickListener(view -> Log.d("happy", "Position " + i));
+        viewHolder.layout.setOnClickListener(view -> MainPresenterImpl.getInstance().itemClicked(item));
     }
 
     @Override

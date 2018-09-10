@@ -28,7 +28,7 @@ public class Item {
     private String status;
     @SerializedName("voting")
     @Expose
-    private Object voting;
+    private Voting voting;
     @SerializedName("hasProtocol")
     @Expose
     private boolean hasProtocol;
@@ -98,11 +98,11 @@ public class Item {
         this.status = status;
     }
 
-    public Object getVoting() {
+    public Voting getVoting() {
         return voting;
     }
 
-    public void setVoting(Object voting) {
+    public void setVoting(Voting voting) {
         this.voting = voting;
     }
 

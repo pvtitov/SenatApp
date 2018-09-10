@@ -7,15 +7,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.login.LoginActivity;
+import ru.github.pvtitov.senatapp.pojos.Meeting;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
     private android.support.v7.widget.Toolbar toolbar;
     private MainPresenterImpl presenter;
+    private FragmentManager fragmentManager;
+    private ListMeetingsFragment fragmentList;
+    private DetailMeetingFragment fragmentDetails;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -28,24 +36,32 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.setModel(new MainModelImpl());
         presenter.authStatusCheck();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(ListMeetingsFragment.TAG);
-        if (fragment == null){
-            fragment = new ListMeetingsFragment();
-            fragment.setRetainInstance(true);
+        fragmentManager = getSupportFragmentManager();
+        fragmentList = (ListMeetingsFragment) fragmentManager.findFragmentByTag(ListMeetingsFragment.TAG);
+        if (fragmentList == null){
+            fragmentList = new ListMeetingsFragment();
+            fragmentList.setRetainInstance(true);
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.main_fragment_container, fragment, ListMeetingsFragment.TAG)
+                    .add(R.id.main_fragment_container, fragmentList, ListMeetingsFragment.TAG)
+                    .addToBackStack(null)
+                    .commit();
+        }
+        fragmentDetails = (DetailMeetingFragment) fragmentManager.findFragmentByTag(DetailMeetingFragment.TAG);
+        if (fragmentDetails == null){
+            fragmentDetails = new DetailMeetingFragment();
+            fragmentDetails.setRetainInstance(true);
+            fragmentManager
+                    .beginTransaction()
+                    .add(R.id.detail_fragment_container, fragmentDetails, DetailMeetingFragment.TAG)
+                    .addToBackStack(null)
                     .commit();
         }
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
+        progressBar = findViewById(R.id.main_progress_bar);
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         presenter.downloadMeeting();
     }
 
@@ -61,13 +77,25 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void showProgressBar() {
+    public void showMeetingDetails(Meeting meeting) {
 
+        fragmentDetails = new DetailMeetingFragment();
+        fragmentDetails.setMeeting(meeting);
+        fragmentDetails.setRetainInstance(true);
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.detail_fragment_container, fragmentDetails, DetailMeetingFragment.TAG)
+                .commit();
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
