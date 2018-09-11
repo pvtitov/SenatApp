@@ -1,5 +1,7 @@
 package ru.github.pvtitov.senatapp.main;
 
+import android.util.Log;
+
 import java.util.List;
 
 import retrofit2.Call;

@@ -27,27 +27,17 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/first_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:baselineAligned="false">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-            <FrameLayout
-                android:id="@+id/detail_fragment_container"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-            <FrameLayout
-                android:id="@+id/main_fragment_container"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="0dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        </LinearLayout>
+        <FrameLayout
+            android:id="@+id/second_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </LinearLayout>
 

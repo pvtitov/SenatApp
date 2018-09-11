@@ -1,7 +1,7 @@
 package ru.github.pvtitov.senatapp.main;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,13 +16,14 @@ import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.login.LoginActivity;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+
 public class MainActivity extends AppCompatActivity implements MainView {
 
     private android.support.v7.widget.Toolbar toolbar;
     private MainPresenterImpl presenter;
     private FragmentManager fragmentManager;
-    private ListMeetingsFragment fragmentList;
-    private DetailMeetingFragment fragmentDetails;
     private ProgressBar progressBar;
 
 
@@ -37,25 +38,26 @@ public class MainActivity extends AppCompatActivity implements MainView {
         presenter.authStatusCheck();
 
         fragmentManager = getSupportFragmentManager();
-        fragmentList = (ListMeetingsFragment) fragmentManager.findFragmentByTag(ListMeetingsFragment.TAG);
-        if (fragmentList == null){
-            fragmentList = new ListMeetingsFragment();
-            fragmentList.setRetainInstance(true);
-            fragmentManager
-                    .beginTransaction()
-                    .add(R.id.main_fragment_container, fragmentList, ListMeetingsFragment.TAG)
-                    .addToBackStack(null)
-                    .commit();
+        ListMeetingsFragment listFragment = (ListMeetingsFragment) fragmentManager.findFragmentByTag(ListMeetingsFragment.TAG);
+        if (listFragment == null){
+            listFragment = new ListMeetingsFragment();
+            listFragment.setRetainInstance(true);
         }
-        fragmentDetails = (DetailMeetingFragment) fragmentManager.findFragmentByTag(DetailMeetingFragment.TAG);
-        if (fragmentDetails == null){
-            fragmentDetails = new DetailMeetingFragment();
-            fragmentDetails.setRetainInstance(true);
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.first_fragment_container, listFragment, ListMeetingsFragment.TAG)
+                .commit();
+
+        DetailMeetingFragment detailFragment = (DetailMeetingFragment) fragmentManager.findFragmentByTag(DetailMeetingFragment.TAG);
+        if (detailFragment != null){
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.detail_fragment_container, fragmentDetails, DetailMeetingFragment.TAG)
-                    .addToBackStack(null)
+                    .replace(R.id.second_fragment_container, detailFragment, DetailMeetingFragment.TAG)
                     .commit();
+
+            if (this.getResources().getConfiguration().orientation == ORIENTATION_PORTRAIT){
+                findViewById(R.id.first_fragment_container).setVisibility(View.GONE);
+            }
         }
 
         toolbar = findViewById(R.id.toolbar);
@@ -77,15 +79,25 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        findViewById(R.id.first_fragment_container).setVisibility(View.VISIBLE);
+    }
+
+    @Override
     public void showMeetingDetails(Meeting meeting) {
 
-        fragmentDetails = new DetailMeetingFragment();
-        fragmentDetails.setMeeting(meeting);
-        fragmentDetails.setRetainInstance(true);
+        DetailMeetingFragment detailsFragment = new DetailMeetingFragment();
+        detailsFragment.setRetainInstance(true);
+        detailsFragment.setMeeting(meeting);
         fragmentManager
                 .beginTransaction()
-                .replace(R.id.detail_fragment_container, fragmentDetails, DetailMeetingFragment.TAG)
+                .replace(R.id.second_fragment_container, detailsFragment, DetailMeetingFragment.TAG)
+                .addToBackStack(null)
                 .commit();
+        if (this.getResources().getConfiguration().orientation == ORIENTATION_PORTRAIT){
+            findViewById(R.id.first_fragment_container).setVisibility(View.GONE);
+        }
     }
 
     @Override

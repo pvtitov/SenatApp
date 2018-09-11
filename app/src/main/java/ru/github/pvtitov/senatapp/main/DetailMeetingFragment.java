@@ -51,7 +51,6 @@ public class DetailMeetingFragment extends Fragment {
                 .append(meeting.getStatus()).append("\n")
                 .append(meeting.getDate()).append("\n")
                 .append(meeting.getCollegialBody().getName()).append("\n")
-                .append(meeting.getAddress()).append("\n")
                 .append(meeting.getHead() == null ? "" : meeting.getHead().getFirstName()).append("\n")
                 .append(meeting.getHead() == null ? "" : meeting.getHead().getLastName()).append("\n")
                 .append(meeting.getSecretary() == null ? "" : meeting.getSecretary().getFirstName()).append("\n")
@@ -60,8 +59,7 @@ public class DetailMeetingFragment extends Fragment {
             for (Agenda agenda: meeting.getAgenda()) {
                 text.append(agenda.getTitle()).append("\n")
                         .append(agenda.getAuthor() == null ? "" : agenda.getAuthor().getFirstName()).append("\n")
-                        .append(agenda.getAuthor() == null ? "" : agenda.getAuthor().getLastName()).append("\n")
-                        .append(agenda.getDescription()).append("\n");
+                        .append(agenda.getAuthor() == null ? "" : agenda.getAuthor().getLastName()).append("\n");
             }
         }
 

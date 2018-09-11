@@ -24,9 +24,12 @@ public class Meeting {
     @SerializedName("createDate")
     @Expose
     private String createDate;
+    /*
+    TODO Produced Expected a string but was BEGIN_OBJECT at line 4 column 15 path $.address
     @SerializedName("address")
     @Expose
     private String address;
+    */
     @SerializedName("head")
     @Expose
     private Head head;
@@ -94,6 +97,7 @@ public class Meeting {
         this.createDate = createDate;
     }
 
+    /*
     public String getAddress() {
         return address;
     }
@@ -101,6 +105,7 @@ public class Meeting {
     public void setAddress(String address) {
         this.address = address;
     }
+    */
 
     public Head getHead() {
         return head;
