@@ -1,20 +1,15 @@
 package ru.github.pvtitov.senatapp.main;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import ru.github.pvtitov.senatapp.MvpContract;
 import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.pojos.Item;
-import ru.github.pvtitov.senatapp.pojos.Meeting;
 import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingViewHolder> {
@@ -32,7 +27,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @NonNull
     @Override
     public MeetingViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.meetings_item, viewGroup, false);
         return new MeetingViewHolder(view);
     }
 
@@ -71,7 +66,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
             this.holdingName = view.findViewById(R.id.item_holding_name);
             this.collegialBody = view.findViewById(R.id.item_collegial_body);
             this.status = view.findViewById(R.id.item_status);
-            this.layout = view.findViewById(R.id.item_container);
+            this.layout = view.findViewById(R.id.meetings_item_container);
         }
     }
 }

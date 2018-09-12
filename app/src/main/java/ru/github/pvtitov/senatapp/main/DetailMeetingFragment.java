@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +21,10 @@ public class DetailMeetingFragment extends Fragment {
     public static final String TAG = "ru.github.pvtitov.senatapp.main.DetailMeetingFragment";
 
     private MainPresenterImpl presenter;
-    private TextView idTextView;
     private Meeting meeting;
+    private TextView dateTextView;
+    private TextView statusTextView;
+    private TextView collegialBodyTextView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,49 +37,18 @@ public class DetailMeetingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_meeting_details, container, false);
 
-        idTextView = view.findViewById(R.id.details_text);
-        if (meeting != null) {
-            String text = parseMeetingPojo(meeting);
-            idTextView.setText(text);
-        }
+        dateTextView = view.findViewById(R.id.details_date_value);
+        statusTextView = view.findViewById(R.id.details_status_value);
+        collegialBodyTextView = view.findViewById(R.id.details_coolegial_body_value);
+
+        dateTextView.setText(meeting.getDate());
+        statusTextView.setText(meeting.getStatus());
+        collegialBodyTextView.setText(meeting.getCollegialBody().getName());
 
         return view;
     }
 
-    private String parseMeetingPojo(Meeting meeting) {
-
-        if (meeting == null) return "";
-
-        StringBuilder text = new StringBuilder()
-                .append(meeting.getId()).append("\n")
-                .append(meeting.getStatus()).append("\n")
-                .append(meeting.getDate()).append("\n")
-                .append(meeting.getCollegialBody().getName()).append("\n")
-                .append(meeting.getHead() == null ? "" : meeting.getHead().getFirstName()).append("\n")
-                .append(meeting.getHead() == null ? "" : meeting.getHead().getLastName()).append("\n")
-                .append(meeting.getSecretary() == null ? "" : meeting.getSecretary().getFirstName()).append("\n")
-                .append(meeting.getSecretary() == null ? "" : meeting.getSecretary().getLastName()).append("\n");
-        if (meeting.getAgenda() != null) {
-            for (Agenda agenda: meeting.getAgenda()) {
-                text.append(agenda.getTitle()).append("\n")
-                        .append(agenda.getAuthor() == null ? "" : agenda.getAuthor().getFirstName()).append("\n")
-                        .append(agenda.getAuthor() == null ? "" : agenda.getAuthor().getLastName()).append("\n");
-            }
-        }
-
-        if (meeting.getParticipants() != null) {
-            for (Participant participant: meeting.getParticipants()) {
-                text
-                        .append(participant.getFirstName()).append("\n")
-                        .append(participant.getLastName()).append("\n");
-            }
-        }
-
-        return text.toString();
-    }
-
     public void setMeeting(Meeting meeting) {
         this.meeting = meeting;
-        if (idTextView != null) idTextView.setText(meeting.getId());
     }
 }
