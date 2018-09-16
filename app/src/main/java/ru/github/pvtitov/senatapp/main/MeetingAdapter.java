@@ -1,12 +1,20 @@
 package ru.github.pvtitov.senatapp.main;
 
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.pojos.Item;
@@ -34,15 +42,27 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @Override
     public void onBindViewHolder(@NonNull MeetingViewHolder viewHolder, int i) {
         Item item = meetings.getItems().get(i);
-        String date = "";
-        if (item.getId() != null) date = item.getDate();
-        if (item.getStartDate() != null) date = item.getStartDate();
-        if (item.getEndDate() != null) date = date + " - " + item.getEndDate();
-        viewHolder.date.setText(date);
-        viewHolder.holdingName.setText(item.getHolding().getName());
+        try {
+            if (item.getDate() != null) {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date millis = format.parse(item.getDate());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(millis);
+                String[] months = {"января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+                StringBuilder dataText = new StringBuilder()
+                        .append(calendar.get(Calendar.DAY_OF_MONTH))
+                        .append(" ")
+                        .append(months[calendar.get(Calendar.MONTH)])
+                        .append(" ")
+                        .append(calendar.get(Calendar.YEAR));
+                viewHolder.date.setText(dataText);
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         viewHolder.collegialBody.setText(item.getCollegialBody().getName());
         viewHolder.status.setText(item.getStatus());
-        viewHolder.layout.setOnClickListener(view -> MainPresenterImpl.getInstance().itemClicked(item));
+        viewHolder.container.setOnClickListener(view -> MainPresenterImpl.getInstance().itemClicked(item));
     }
 
     @Override
@@ -54,19 +74,17 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
 
     static class MeetingViewHolder extends RecyclerView.ViewHolder {
 
-        LinearLayout layout;
+        ViewGroup container;
         TextView date;
-        TextView holdingName;
         TextView collegialBody;
         TextView status;
 
         MeetingViewHolder(View view) {
             super(view);
-            this.date = view.findViewById(R.id.item_date);
-            this.holdingName = view.findViewById(R.id.item_holding_name);
-            this.collegialBody = view.findViewById(R.id.item_collegial_body);
-            this.status = view.findViewById(R.id.item_status);
-            this.layout = view.findViewById(R.id.meetings_item_container);
+            this.date = view.findViewById(R.id.item_date_value);
+            this.collegialBody = view.findViewById(R.id.item_collegial_body_value);
+            this.status = view.findViewById(R.id.item_status_value);
+            this.container = view.findViewById(R.id.meetings_item_container);
         }
     }
 }

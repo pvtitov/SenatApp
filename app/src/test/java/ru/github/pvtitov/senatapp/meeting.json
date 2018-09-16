@@ -1,0 +1,85 @@
+{
+  "id": "0b1bd749-118e-42e1-b485-28e9599ba9ea",
+  "num": "1",
+  "status": "Opened",
+  "type": "Presentia",
+  "date": "2018-08-22T12:21:39.987+00:00",
+  "createDate": "2018-08-13T12:22:23.922278+00:00",
+  "address": "Moscow, Vavilova street, 19",
+  "head": {
+    "firstName": ".",
+    "lastName": "CHAIRMAN OF THE COMMITTEE",
+    "middleName": ".",
+    "id": "f8738c49-4271-490a-96fc-b6b565892b27"
+  },
+  "secretary": {
+    "firstName": ".",
+    "lastName": "COMMITTEE SECRETARY",
+    "middleName": ".",
+    "id": "a38e6684-b18e-4b6d-b96b-3054462a5d80"
+  },
+  "agenda": [
+    {
+      "id": "496e125f-9c24-4b87-a308-0341c1e90614",
+      "order": 1,
+      "title": "Increase in the interest rate on consumer loans",
+      "description": "It is necessary to revise current interest rates",
+      "author": {
+        "firstName": ".",
+        "lastName": "CHAIRMAN OF THE COMMITTEE",
+        "middleName": ".",
+        "id": "f8738c49-4271-490a-96fc-b6b565892b27"
+      },
+      "status": "Resolved"
+    }
+  ],
+  "participants": [
+    {
+      "role": "InvitedOnMeeting",
+      "firstName": ".",
+      "lastName": "Second member of the committee",
+      "middleName": ".",
+      "id": "7b088b87-9114-4e72-91c8-0ea03842196d"
+    },
+    {
+      "role": "CollegialBodyMember",
+      "firstName": ".",
+      "lastName": "COMMITTEE SECRETARY",
+      "middleName": ".",
+      "id": "a38e6684-b18e-4b6d-b96b-3054462a5d80"
+    },
+    {
+      "role": "InvitedOnMeeting",
+      "firstName": ".",
+      "lastName": "GUEST SPEAKER",
+      "middleName": ".",
+      "id": "63273c99-a52b-4db5-92aa-8902f7f0e7ee"
+    },
+    {
+      "role": "CollegialBodyMember",
+      "firstName": ".",
+      "lastName": "CHAIRMAN OF THE COMMITTEE",
+      "middleName": ".",
+      "id": "f8738c49-4271-490a-96fc-b6b565892b27"
+    },
+    {
+      "role": "InvitedOnMeeting",
+      "firstName": ".",
+      "lastName": "First member of the committee",
+      "middleName": ".",
+      "id": "2a5d8454-86c4-45f2-b2fd-b79763d96204"
+    },
+    {
+      "role": "InvitedOnMeeting",
+      "firstName": ".",
+      "lastName": "COMMITTEE MEMBER",
+      "middleName": ".",
+      "id": "747a68e6-d71b-4e4c-96c8-b8c879e95022"
+    }
+  ],
+  "collegialBody": {
+    "name": "Credit Committee",
+    "id": "fc15cefd-4b69-46cb-a07e-c69247fb747c"
+  },
+  "hasProtocol": false
+}
