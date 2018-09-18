@@ -77,9 +77,9 @@ public class DetailMeetingFragment extends Fragment {
         }
 
         statusTextView.setText(meeting.getStatus());
-        collegialBodyTextView.setText(meeting.getCollegialBody().getName());
-        //if (meeting.getAddress() != null)
-        //    addressTextView.setText(meeting.getAddress());
+        if (meeting.getCollegialBody() != null) collegialBodyTextView.setText(meeting.getCollegialBody().getName());
+        if (meeting.getAddress() != null)
+            addressTextView.setText(meeting.getAddress());
         if (meeting.getHead() != null) {
             String headName = meeting.getHead().getFirstName() + meeting.getHead().getLastName();
             headTextView.setText(headName);
