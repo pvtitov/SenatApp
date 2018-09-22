@@ -10,12 +10,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import ru.github.pvtitov.senatapp.App;
-import ru.github.pvtitov.senatapp.http_service.AddCookiesInterceptor;
 import ru.github.pvtitov.senatapp.http_service.ErrorResponseParser;
 import ru.github.pvtitov.senatapp.http_service.LoginService;
 import ru.github.pvtitov.senatapp.http_service.ReceivedCookiesInterceptor;
+import ru.github.pvtitov.senatapp.http_service.RetrofitManager;
 import ru.github.pvtitov.senatapp.pojos.AuthRequest;
+
+import static ru.github.pvtitov.senatapp.login.LoginMvpContract.*;
 
 public class LoginModelImpl implements LoginModel {
 
@@ -49,17 +50,7 @@ public class LoginModelImpl implements LoginModel {
     }
 
     private LoginService initLoginService() {
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new ReceivedCookiesInterceptor())
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://senat.azurewebsites.net/")
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
+        Retrofit retrofit = RetrofitManager.createRetrofitForLogin();
         return retrofit.create(LoginService.class);
     }
 

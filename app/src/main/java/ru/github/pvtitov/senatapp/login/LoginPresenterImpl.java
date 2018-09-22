@@ -3,9 +3,12 @@ package ru.github.pvtitov.senatapp.login;
 import android.content.SharedPreferences;
 
 import ru.github.pvtitov.senatapp.App;
-import ru.github.pvtitov.senatapp.MvpContract;
+import ru.github.pvtitov.senatapp.BasicPresenter;
 
-public class LoginPresenterImpl extends MvpContract.BasicPresenter<LoginView, LoginModel> implements LoginModel.AuthListener {
+import static ru.github.pvtitov.senatapp.login.LoginMvpContract.*;
+import static ru.github.pvtitov.senatapp.login.LoginMvpContract.LoginModel.*;
+
+public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> implements LoginPresenter, AuthListener {
 
     private static LoginPresenterImpl instance;
 
@@ -18,6 +21,7 @@ public class LoginPresenterImpl extends MvpContract.BasicPresenter<LoginView, Lo
     }
 
 
+    @Override
     public void authorize(String login, String password) {
         LoginModel model = getModel();
         if (model != null) {
@@ -26,6 +30,7 @@ public class LoginPresenterImpl extends MvpContract.BasicPresenter<LoginView, Lo
         }
     }
 
+    @Override
     public void logout() {
         LoginModel model = getModel();
         if (model != null) {

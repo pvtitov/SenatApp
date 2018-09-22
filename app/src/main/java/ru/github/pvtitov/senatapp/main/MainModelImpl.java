@@ -1,7 +1,5 @@
 package ru.github.pvtitov.senatapp.main;
 
-import android.util.Log;
-
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,6 +11,8 @@ import ru.github.pvtitov.senatapp.http_service.MeetingService;
 import ru.github.pvtitov.senatapp.pojos.Item;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 import ru.github.pvtitov.senatapp.pojos.Meetings;
+
+import static ru.github.pvtitov.senatapp.main.MainMvpContract.*;
 
 public class MainModelImpl implements MainModel {
 

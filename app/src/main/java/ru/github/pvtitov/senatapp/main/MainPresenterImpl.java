@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 
 import ru.github.pvtitov.senatapp.App;
-import ru.github.pvtitov.senatapp.MvpContract;
+import ru.github.pvtitov.senatapp.BasicPresenter;
 import ru.github.pvtitov.senatapp.pojos.Item;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 import ru.github.pvtitov.senatapp.pojos.Meetings;
 
-public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, MainModel> implements MainModel.MeetingsListener, MainModel.SingleMeetingListener {
+import static ru.github.pvtitov.senatapp.main.MainMvpContract.*;
+import static ru.github.pvtitov.senatapp.main.MainMvpContract.MainModel.*;
+
+public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> implements MainPresenter, MeetingsListener, SingleMeetingListener {
 
     private static MainPresenterImpl instance;
 
@@ -25,6 +28,7 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
     private Meetings meetings;
     private MeetingAdapter adapter;
 
+    @Override
     public void authStatusCheck() {
         SharedPreferences prefs = App.getSharedPreferences();
         if (prefs.getStringSet(App.COOKIES, new HashSet<>()).size() == 0) {
@@ -33,6 +37,7 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
         }
     }
 
+    @Override
     public void downloadMeeting() {
         getModel().setMeetingsListener(this);
         getModel().downloadMeetings();
@@ -58,15 +63,18 @@ public class MainPresenterImpl extends MvpContract.BasicPresenter<MainView, Main
 
     }
 
+    @Override
     public void openLoginScreeen() {
         getView().openLoginScreen();
     }
 
+    @Override
     public MeetingAdapter getMeetingAdapter() {
         adapter = new MeetingAdapter(meetings);
         return adapter;
     }
 
+    @Override
     public void itemClicked(Item item) {
         getModel().setSingleMeetingListener(this);
         getModel().downloadSingleMeeting(item);

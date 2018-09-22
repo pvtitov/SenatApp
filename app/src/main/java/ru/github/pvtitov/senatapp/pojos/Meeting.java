@@ -24,6 +24,7 @@ public class Meeting {
     @SerializedName("createDate")
     @Expose
     private String createDate;
+    /*
     @SerializedName("address")
     @Expose
     private String address;
@@ -38,13 +39,13 @@ public class Meeting {
     private List<Agenda> agenda;
     @SerializedName("participants")
     @Expose
-    private List<Participant> participants;
+    private List<Participant> participants;*/
     @SerializedName("collegialBody")
     @Expose
     private CollegialBody collegialBody;
-    @SerializedName("hasProtocol")
-    @Expose
-    private boolean hasProtocol;
+    //@SerializedName("hasProtocol")
+    //@Expose
+    //private boolean hasProtocol;
 
     public String getId() {
         return id;
@@ -94,6 +95,7 @@ public class Meeting {
         this.createDate = createDate;
     }
 
+    /*
     public String getAddress() {
         return address;
     }
@@ -133,6 +135,7 @@ public class Meeting {
     public void setParticipants(List<Participant> participants) {
         this.participants = participants;
     }
+    */
 
     public CollegialBody getCollegialBody() {
         return collegialBody;
@@ -142,6 +145,7 @@ public class Meeting {
         this.collegialBody = collegialBody;
     }
 
+    /*
     public boolean isHasProtocol() {
         return hasProtocol;
     }
@@ -149,5 +153,5 @@ public class Meeting {
     public void setHasProtocol(boolean hasProtocol) {
         this.hasProtocol = hasProtocol;
     }
-
+    */
 }

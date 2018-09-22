@@ -1,7 +1,5 @@
 package ru.github.pvtitov.senatapp.login;
 
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,6 +7,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
+
+import static ru.github.pvtitov.senatapp.login.LoginMvpContract.*;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
 

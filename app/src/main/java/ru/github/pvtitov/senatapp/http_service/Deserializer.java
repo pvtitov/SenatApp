@@ -1,9 +1,6 @@
 package ru.github.pvtitov.senatapp.http_service;
 
-import android.util.Log;
-
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -19,12 +16,12 @@ public class Deserializer<T> implements JsonDeserializer<T> {
     }
 
     private String elementName;
-    private Gson gson = new Gson();
 
     @Override
     public T deserialize(JsonElement rootElement, Type type, JsonDeserializationContext context) throws JsonParseException {
 
         JsonElement element = rootElement.getAsJsonObject().get(elementName);
+        Gson gson = new Gson();
         return gson.fromJson(element, type);
     }
 }

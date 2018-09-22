@@ -1,6 +1,5 @@
 package ru.github.pvtitov.senatapp.main;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -16,8 +14,8 @@ import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.login.LoginActivity;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 
-import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+import static ru.github.pvtitov.senatapp.main.MainMvpContract.*;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
