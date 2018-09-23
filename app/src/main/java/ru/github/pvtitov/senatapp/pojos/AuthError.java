@@ -5,7 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import ru.github.pvtitov.senatapp.http_service.HttpClient;
+
 public class AuthError {
+
     @SerializedName("key")
     @Expose
     private String key;
@@ -40,5 +43,4 @@ public class AuthError {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

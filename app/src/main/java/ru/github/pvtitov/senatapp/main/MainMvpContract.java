@@ -10,25 +10,13 @@ public interface MainMvpContract {
         void authStatusCheck();
         void downloadMeeting();
         void openLoginScreeen();
-        void itemClicked(Item item);
+        void itemClicked(String id);
         MeetingAdapter getMeetingAdapter();
     }
 
     interface MainModel extends MvpContract.Model {
         void downloadMeetings();
-        void setMeetingsListener(MeetingsListener listener);
-        void downloadSingleMeeting(Item item);
-        void setSingleMeetingListener(SingleMeetingListener listener);
-
-        interface MeetingsListener {
-            void onSuccess(Meetings meetings);
-            void onError(String message);
-        }
-
-        interface SingleMeetingListener {
-            void onSuccess(Meeting meeting);
-            void onError(String message);
-        }
+        void downloadSingleMeeting(String id);
     }
 
     interface MainView extends MvpContract.View {

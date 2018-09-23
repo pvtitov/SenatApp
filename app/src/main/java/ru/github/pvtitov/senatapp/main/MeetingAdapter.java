@@ -62,7 +62,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         }
         if (item.getCollegialBody() != null) viewHolder.collegialBody.setText(item.getCollegialBody().getName());
         viewHolder.status.setText(item.getStatus());
-        viewHolder.container.setOnClickListener(view -> MainPresenterImpl.getInstance().itemClicked(item));
+        viewHolder.container.setOnClickListener(view -> MainPresenterImpl.getInstance().itemClicked(item.getId()));
     }
 
     @Override

@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         presenter = MainPresenterImpl.getInstance();
         presenter.attachView(this);
-        presenter.setModel(new MainModelImpl());
+        presenter.setModel(new MainModelImpl(presenter));
         presenter.authStatusCheck();
 
         fragmentManager = getSupportFragmentManager();

@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.BasicPresenter;
+import ru.github.pvtitov.senatapp.http_service.HttpClient;
 import ru.github.pvtitov.senatapp.pojos.Item;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 import ru.github.pvtitov.senatapp.pojos.Meetings;
@@ -13,7 +14,7 @@ import ru.github.pvtitov.senatapp.pojos.Meetings;
 import static ru.github.pvtitov.senatapp.main.MainMvpContract.*;
 import static ru.github.pvtitov.senatapp.main.MainMvpContract.MainModel.*;
 
-public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> implements MainPresenter, MeetingsListener, SingleMeetingListener {
+public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> implements MainPresenter, HttpClient.HttpResponseListener {
 
     private static MainPresenterImpl instance;
 
@@ -39,7 +40,6 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
 
     @Override
     public void downloadMeeting() {
-        getModel().setMeetingsListener(this);
         getModel().downloadMeetings();
         getView().showProgressBar();
     }
@@ -60,7 +60,12 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
 
     @Override
     public void onError(String message) {
+        getView().showMessage(message);
+    }
 
+    @Override
+    public void onError(Throwable throwable) {
+        getView().showMessage(throwable.getMessage());
     }
 
     @Override
@@ -75,9 +80,8 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
     }
 
     @Override
-    public void itemClicked(Item item) {
-        getModel().setSingleMeetingListener(this);
-        getModel().downloadSingleMeeting(item);
+    public void itemClicked(String id) {
+        getModel().downloadSingleMeeting(id);
         getView().showProgressBar();
     }
 }
