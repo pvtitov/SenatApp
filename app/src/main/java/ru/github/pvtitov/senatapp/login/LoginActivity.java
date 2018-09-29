@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
 
-import static ru.github.pvtitov.senatapp.login.LoginMvpContract.*;
+import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.*;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
 

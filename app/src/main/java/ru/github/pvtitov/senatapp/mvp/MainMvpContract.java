@@ -1,9 +1,8 @@
-package ru.github.pvtitov.senatapp.main;
+package ru.github.pvtitov.senatapp.mvp;
 
-import ru.github.pvtitov.senatapp.MvpContract;
-import ru.github.pvtitov.senatapp.pojos.Item;
+import ru.github.pvtitov.senatapp.main.MeetingAdapter;
+import ru.github.pvtitov.senatapp.mvp.MvpContract;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
-import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public interface MainMvpContract {
     interface MainPresenter {

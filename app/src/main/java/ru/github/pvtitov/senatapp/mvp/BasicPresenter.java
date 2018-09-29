@@ -1,4 +1,4 @@
-package ru.github.pvtitov.senatapp;
+package ru.github.pvtitov.senatapp.mvp;
 
 public abstract class BasicPresenter<V extends MvpContract.View, M extends MvpContract.Model> implements MvpContract.Presenter<V, M> {
 

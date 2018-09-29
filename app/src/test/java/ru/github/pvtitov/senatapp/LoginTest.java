@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import ru.github.pvtitov.senatapp.login.LoginModelImpl;
-import ru.github.pvtitov.senatapp.login.LoginMvpContract;
+import ru.github.pvtitov.senatapp.mvp.LoginMvpContract;
 import ru.github.pvtitov.senatapp.login.LoginPresenterImpl;
 
 import static org.mockito.Mockito.verify;

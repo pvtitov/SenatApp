@@ -5,16 +5,17 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 
 import ru.github.pvtitov.senatapp.App;
-import ru.github.pvtitov.senatapp.BasicPresenter;
+import ru.github.pvtitov.senatapp.mvp.BasicPresenter;
 import ru.github.pvtitov.senatapp.http_service.HttpClient;
-import ru.github.pvtitov.senatapp.pojos.Item;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 import ru.github.pvtitov.senatapp.pojos.Meetings;
 
-import static ru.github.pvtitov.senatapp.main.MainMvpContract.*;
-import static ru.github.pvtitov.senatapp.main.MainMvpContract.MainModel.*;
+import static ru.github.pvtitov.senatapp.mvp.MainMvpContract.*;
 
 public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> implements MainPresenter, HttpClient.HttpResponseListener {
+
+    private Meetings meetings;
+    private MeetingAdapter adapter;
 
     private static MainPresenterImpl instance;
 
@@ -25,9 +26,6 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
 
     private MainPresenterImpl() {
     }
-
-    private Meetings meetings;
-    private MeetingAdapter adapter;
 
     @Override
     public void authStatusCheck() {
@@ -60,12 +58,8 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
 
     @Override
     public void onError(String message) {
+        getView().hideProgressBar();
         getView().showMessage(message);
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-        getView().showMessage(throwable.getMessage());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package ru.github.pvtitov.senatapp;
+package ru.github.pvtitov.senatapp.mvp;
 
 public interface MvpContract {
 

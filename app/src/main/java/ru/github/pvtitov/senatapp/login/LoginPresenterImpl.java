@@ -3,10 +3,10 @@ package ru.github.pvtitov.senatapp.login;
 import android.content.SharedPreferences;
 
 import ru.github.pvtitov.senatapp.App;
-import ru.github.pvtitov.senatapp.BasicPresenter;
+import ru.github.pvtitov.senatapp.mvp.BasicPresenter;
 
-import static ru.github.pvtitov.senatapp.login.LoginMvpContract.*;
-import static ru.github.pvtitov.senatapp.login.LoginMvpContract.LoginModel.*;
+import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.*;
+import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.LoginModel.*;
 
 public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> implements LoginPresenter, AuthListener {
 

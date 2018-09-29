@@ -4,19 +4,16 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import ru.github.pvtitov.senatapp.http_service.ErrorResponseParser;
 import ru.github.pvtitov.senatapp.http_service.LoginService;
-import ru.github.pvtitov.senatapp.http_service.ReceivedCookiesInterceptor;
 import ru.github.pvtitov.senatapp.http_service.RetrofitManager;
 import ru.github.pvtitov.senatapp.pojos.AuthRequest;
 
-import static ru.github.pvtitov.senatapp.login.LoginMvpContract.*;
+import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.*;
 
 public class LoginModelImpl implements LoginModel {
 

@@ -1,6 +1,4 @@
-package ru.github.pvtitov.senatapp.login;
-
-import ru.github.pvtitov.senatapp.MvpContract;
+package ru.github.pvtitov.senatapp.mvp;
 
 public interface LoginMvpContract {
 

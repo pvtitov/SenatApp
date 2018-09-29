@@ -11,25 +11,9 @@ public interface HttpClient {
     void requestMeetingsList();
     void requestMeeting(String id);
 
-    class RequestNotSuccessfulException extends Exception {
-
-        public RequestNotSuccessfulException(String message) {
-            super(message);
-        }
-
-        public RequestNotSuccessfulException(String message, Throwable throwable) {
-            super(message, throwable);
-        }
-
-        public RequestNotSuccessfulException(Throwable throwable) {
-            super(throwable);
-        }
-    }
-
     interface HttpResponseListener {
         void onSuccess(Meetings meetings);
         void onSuccess(Meeting meeting);
         void onError(String message);
-        void onError(Throwable throwable);
     }
 }

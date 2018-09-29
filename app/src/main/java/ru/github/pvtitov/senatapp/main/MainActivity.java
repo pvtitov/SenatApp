@@ -11,11 +11,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import ru.github.pvtitov.senatapp.R;
+import ru.github.pvtitov.senatapp.http_service.DummyHttpClient;
+import ru.github.pvtitov.senatapp.http_service.HttpClientRetrofitImpl;
 import ru.github.pvtitov.senatapp.login.LoginActivity;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 
 import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
-import static ru.github.pvtitov.senatapp.main.MainMvpContract.*;
+import static ru.github.pvtitov.senatapp.mvp.MainMvpContract.*;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
@@ -32,7 +34,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         presenter = MainPresenterImpl.getInstance();
         presenter.attachView(this);
-        presenter.setModel(new MainModelImpl(presenter));
+        //TODO Move to presenter!!!
+        presenter.setModel(new MainModelImpl(new HttpClientRetrofitImpl(presenter)));
+        //presenter.setModel(new MainModelImpl(new DummyHttpClient(presenter)));
         presenter.authStatusCheck();
 
         fragmentManager = getSupportFragmentManager();
