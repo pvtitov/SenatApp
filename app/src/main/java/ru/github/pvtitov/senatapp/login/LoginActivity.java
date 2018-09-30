@@ -21,7 +21,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         presenter = LoginPresenterImpl.getInstance();
         presenter.attachView(this);
-        presenter.setModel(new LoginModelImpl());
 
         EditText loginEditText = findViewById(R.id.login_edittext);
         EditText passwordEditText = findViewById(R.id.password_edittext);

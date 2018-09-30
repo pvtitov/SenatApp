@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 
 import ru.github.pvtitov.senatapp.App;
+import ru.github.pvtitov.senatapp.http_service.HttpClientRetrofitImpl;
 import ru.github.pvtitov.senatapp.mvp.BasicPresenter;
 import ru.github.pvtitov.senatapp.http_service.HttpClient;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
@@ -25,6 +26,7 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
     }
 
     private MainPresenterImpl() {
+        setModel(new MainModelImpl(new HttpClientRetrofitImpl(this)));
     }
 
     @Override

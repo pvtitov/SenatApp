@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         presenter = MainPresenterImpl.getInstance();
         presenter.attachView(this);
-        //TODO Move to presenter!!!
-        presenter.setModel(new MainModelImpl(new HttpClientRetrofitImpl(presenter)));
-        //presenter.setModel(new MainModelImpl(new DummyHttpClient(presenter)));
         presenter.authStatusCheck();
 
         fragmentManager = getSupportFragmentManager();

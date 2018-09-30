@@ -18,6 +18,7 @@ public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> im
     }
 
     private LoginPresenterImpl() {
+        this.setModel(new LoginModelImpl());
     }
 
 
