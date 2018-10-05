@@ -11,6 +11,6 @@ public interface MeetingService {
     @GET("api/v2.0/meetings")
     Call<Meetings> meetings();
 
-    @GET("api/v2.0/meetings/{id}")
+    @GET("api/public/meetings/{id}")
     Call<Meeting> meeting(@Path("id") String id);
 }
