@@ -9,7 +9,7 @@ import static ru.github.pvtitov.senatapp.mvp.MainMvpContract.*;
 
 public class MainModelImpl implements MainModel {
 
-    private HttpClient httpClient;
+    HttpClient httpClient;
 
     public MainModelImpl(HttpClient client) {
         this.httpClient = client;

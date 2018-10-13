@@ -18,7 +18,6 @@ import java.util.Locale;
 
 import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.R;
-import ru.github.pvtitov.senatapp.dagger.DaggerAppComponent;
 import ru.github.pvtitov.senatapp.mvp.MainMvpContract;
 import ru.github.pvtitov.senatapp.pojos.Item;
 import ru.github.pvtitov.senatapp.pojos.Meetings;

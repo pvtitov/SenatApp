@@ -15,14 +15,19 @@ import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public class HttpClientRetrofitImpl implements HttpClient {
 
-    private MeetingService service = App.getRetrofit().create(MeetingService.class);
+    @Inject MainService service;
     private HttpResponseListener responseListener;
+
+    public HttpClientRetrofitImpl() {
+        service = App.getComponent().mainService();
+    }
 
     @Override
     public void requestMeetingsList() {
         service.meetings().enqueue(new Callback<Meetings>() {
             @Override
             public void onResponse(Call<Meetings> call, Response<Meetings> response) {
+                if (response == null) return;
                 if (response.isSuccessful()) {
                     responseListener.onSuccess(response.body());
                 }

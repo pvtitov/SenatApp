@@ -12,7 +12,11 @@ import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.LoginModel.*;
 
 public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> implements LoginPresenter, AuthListener {
 
-    @Inject LoginModelImpl model = App.getComponent().loginModel();
+    @Inject LoginModelImpl model;
+
+    public LoginPresenterImpl() {
+        model = App.getComponent().loginModel();
+    }
 
     @Override
     public void authorize(String login, String password) {

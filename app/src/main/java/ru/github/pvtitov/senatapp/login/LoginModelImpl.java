@@ -5,27 +5,29 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.http_service.ErrorResponseParser;
 import ru.github.pvtitov.senatapp.http_service.LoginService;
-import ru.github.pvtitov.senatapp.http_service.RetrofitManager;
 import ru.github.pvtitov.senatapp.pojos.AuthRequest;
 
 import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.*;
 
 public class LoginModelImpl implements LoginModel {
 
+    @Inject LoginService loginService;
     private AuthListener authListener;
+
+    public LoginModelImpl(){
+        loginService = App.getComponent().loginService();
+    }
 
     @Override
     public void authorize(String login, String password) {
-
-        LoginService loginService = initLoginService();
 
         AuthRequest authRequest = new AuthRequest();
         authRequest
@@ -37,7 +39,7 @@ public class LoginModelImpl implements LoginModel {
             @Override
             public void onResponse(@NonNull Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    authListener.onLogin();
+                    if (authListener != null) authListener.onLogin();
                 }
                 else handleErrorServerResponse(response);
             }
@@ -49,15 +51,8 @@ public class LoginModelImpl implements LoginModel {
         });
     }
 
-    private LoginService initLoginService() {
-        Retrofit retrofit = RetrofitManager.createRetrofitForLogin();
-        return retrofit.create(LoginService.class);
-    }
-
     @Override
     public void logout() {
-
-        LoginService loginService = initLoginService();
 
         loginService.logout().enqueue(new Callback<Void>() {
             @Override
