@@ -6,20 +6,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.R;
 
 import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.*;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
-    private LoginPresenterImpl presenter;
+    @Inject LoginPresenterImpl presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        presenter = LoginPresenterImpl.getInstance();
+        presenter = App.getComponent().loginPresenter();
         presenter.attachView(this);
 
         EditText loginEditText = findViewById(R.id.login_edittext);

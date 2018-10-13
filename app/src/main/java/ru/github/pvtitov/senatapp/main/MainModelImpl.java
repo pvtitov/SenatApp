@@ -1,5 +1,7 @@
 package ru.github.pvtitov.senatapp.main;
 
+import javax.inject.Inject;
+
 import ru.github.pvtitov.senatapp.http_service.HttpClient;
 import ru.github.pvtitov.senatapp.http_service.HttpClientRetrofitImpl;
 
@@ -21,5 +23,10 @@ public class MainModelImpl implements MainModel {
     @Override
     public void downloadSingleMeeting(String id) {
         httpClient.requestMeeting(id);
+    }
+
+    @Override
+    public void setHttpResponseListener(HttpClient.HttpResponseListener listener) {
+        httpClient.setHttpResponseListener(listener);
     }
 }

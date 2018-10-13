@@ -6,24 +6,25 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import javax.inject.Inject;
+
+import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.R;
-import ru.github.pvtitov.senatapp.pojos.Item;
 
 public class ListMeetingsFragment extends Fragment {
 
+    @Inject MainPresenterImpl presenter;
     public static final String TAG = "ru.github.pvtitov.senatapp.main.ListMeetingsFragment";
     private RecyclerView recyclerView;
-    private MainPresenterImpl presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = MainPresenterImpl.getInstance();
+        presenter = App.getComponent().mainPresenter();
     }
 
     @Nullable

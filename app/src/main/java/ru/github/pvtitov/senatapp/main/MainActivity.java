@@ -10,9 +10,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
+import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.R;
-import ru.github.pvtitov.senatapp.http_service.DummyHttpClient;
-import ru.github.pvtitov.senatapp.http_service.HttpClientRetrofitImpl;
 import ru.github.pvtitov.senatapp.login.LoginActivity;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 
@@ -21,8 +22,8 @@ import static ru.github.pvtitov.senatapp.mvp.MainMvpContract.*;
 
 public class MainActivity extends AppCompatActivity implements MainView {
 
+    @Inject MainPresenterImpl presenter;
     private android.support.v7.widget.Toolbar toolbar;
-    private MainPresenterImpl presenter;
     private FragmentManager fragmentManager;
     private ProgressBar progressBar;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        presenter = MainPresenterImpl.getInstance();
+        presenter = App.getComponent().mainPresenter();
         presenter.attachView(this);
         presenter.authStatusCheck();
 

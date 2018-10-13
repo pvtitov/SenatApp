@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 
 import java.util.HashSet;
 
+import javax.inject.Inject;
+
 import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.http_service.HttpClientRetrofitImpl;
 import ru.github.pvtitov.senatapp.mvp.BasicPresenter;
@@ -17,36 +19,31 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
 
     private Meetings meetings;
     private MeetingAdapter adapter;
+    @Inject MainModelImpl model;
 
-    private static MainPresenterImpl instance;
-
-    public static MainPresenterImpl getInstance() {
-        if (instance == null) instance = new MainPresenterImpl();
-        return instance;
+    public MainPresenterImpl() {
+        model = App.getComponent().mainModel();
+        model.setHttpResponseListener(this);
     }
 
-    private MainPresenterImpl() {
-        setModel(new MainModelImpl(new HttpClientRetrofitImpl(this)));
-    }
 
     @Override
     public void authStatusCheck() {
         SharedPreferences prefs = App.getSharedPreferences();
         if (prefs.getStringSet(App.COOKIES, new HashSet<>()).size() == 0) {
-            MainView view = getView();
-            if (view != null) view.openLoginScreen();
+            if (getView() != null) getView().openLoginScreen();
         }
     }
 
     @Override
     public void downloadMeeting() {
-        getModel().downloadMeetings();
-        getView().showProgressBar();
+        model.downloadMeetings();
+        if (getView() != null) getView().showProgressBar();
     }
 
     @Override
     public void onSuccess(Meetings meetings) {
-        getView().hideProgressBar();
+        if (getView() != null) getView().hideProgressBar();
         this.meetings = meetings;
         adapter.setMeetings(meetings);
         adapter.notifyDataSetChanged();
@@ -54,19 +51,23 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
 
     @Override
     public void onSuccess(Meeting meeting) {
-        getView().hideProgressBar();
-        getView().showMeetingDetails(meeting);
+        if (getView() != null) {
+            getView().hideProgressBar();
+            getView().showMeetingDetails(meeting);
+        }
     }
 
     @Override
     public void onError(String message) {
-        getView().hideProgressBar();
-        getView().showMessage(message);
+        if (getView() != null) {
+            getView().hideProgressBar();
+            getView().showMessage(message);
+        }
     }
 
     @Override
     public void openLoginScreeen() {
-        getView().openLoginScreen();
+        if (getView() != null) getView().openLoginScreen();
     }
 
     @Override
@@ -77,7 +78,7 @@ public class MainPresenterImpl extends BasicPresenter<MainView, MainModel> imple
 
     @Override
     public void itemClicked(String id) {
-        getModel().downloadSingleMeeting(id);
-        getView().showProgressBar();
+        model.downloadSingleMeeting(id);
+        if (getView() != null) getView().showProgressBar();
     }
 }

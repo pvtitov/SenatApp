@@ -1,6 +1,10 @@
 package ru.github.pvtitov.senatapp.http_service;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,13 +15,8 @@ import ru.github.pvtitov.senatapp.pojos.Meetings;
 
 public class HttpClientRetrofitImpl implements HttpClient {
 
-    public HttpClientRetrofitImpl(HttpResponseListener listener) {
-        this.responseListener = listener;
-    }
-
     private MeetingService service = App.getRetrofit().create(MeetingService.class);
     private HttpResponseListener responseListener;
-
 
     @Override
     public void requestMeetingsList() {
@@ -61,5 +60,10 @@ public class HttpClientRetrofitImpl implements HttpClient {
                 responseListener.onError(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void setHttpResponseListener(@NotNull HttpResponseListener listener) {
+        responseListener = listener;
     }
 }

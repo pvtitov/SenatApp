@@ -8,6 +8,7 @@ interface HttpClient {
 
     fun requestMeetingsList()
     fun requestMeeting(id: String)
+    fun setHttpResponseListener(listener: HttpClient.HttpResponseListener)
 
     interface HttpResponseListener {
         fun onSuccess(meetings: Meetings)

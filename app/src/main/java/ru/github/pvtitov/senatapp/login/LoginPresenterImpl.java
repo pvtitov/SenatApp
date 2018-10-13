@@ -2,6 +2,8 @@ package ru.github.pvtitov.senatapp.login;
 
 import android.content.SharedPreferences;
 
+import javax.inject.Inject;
+
 import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.mvp.BasicPresenter;
 
@@ -10,21 +12,10 @@ import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.LoginModel.*;
 
 public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> implements LoginPresenter, AuthListener {
 
-    private static LoginPresenterImpl instance;
-
-    public static LoginPresenterImpl getInstance() {
-        if (instance == null) instance = new LoginPresenterImpl();
-        return instance;
-    }
-
-    private LoginPresenterImpl() {
-        this.setModel(new LoginModelImpl());
-    }
-
+    @Inject LoginModelImpl model = App.getComponent().loginModel();
 
     @Override
     public void authorize(String login, String password) {
-        LoginModel model = getModel();
         if (model != null) {
             model.setAuthListener(this);
             model.authorize(login, password);
@@ -33,7 +24,6 @@ public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> im
 
     @Override
     public void logout() {
-        LoginModel model = getModel();
         if (model != null) {
             model.setAuthListener(this);
             model.logout();
@@ -44,10 +34,7 @@ public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> im
 
     @Override
     public void onLogin() {
-        LoginView view = getView();
-        if (view != null) {
-            view.shutDown();
-        }
+        if (getView() != null) getView().shutDown();
     }
 
     @Override
@@ -57,6 +44,6 @@ public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> im
 
     @Override
     public void onError(String message) {
-        getView().showMessage(message);
+        if (getView() != null) getView().showMessage(message);
     }
 }

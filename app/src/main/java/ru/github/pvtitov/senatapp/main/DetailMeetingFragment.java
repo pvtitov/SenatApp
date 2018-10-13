@@ -16,17 +16,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
+import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.R;
 import ru.github.pvtitov.senatapp.pojos.Agenda;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
 import ru.github.pvtitov.senatapp.pojos.Participant;
-import ru.github.pvtitov.senatapp.pojos.Secretary;
 
 public class DetailMeetingFragment extends Fragment {
 
     public static final String TAG = "ru.github.pvtitov.senatapp.main.DetailMeetingFragment";
 
-    private MainPresenterImpl presenter;
+    @Inject MainPresenterImpl presenter;
     private Meeting meeting;
     private TextView dateTextView;
     private TextView statusTextView;
@@ -40,7 +42,7 @@ public class DetailMeetingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = MainPresenterImpl.getInstance();
+        presenter = App.getComponent().mainPresenter();
     }
 
     @Nullable

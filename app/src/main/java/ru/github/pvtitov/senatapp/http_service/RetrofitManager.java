@@ -16,16 +16,6 @@ public class RetrofitManager {
                 .addInterceptor(new AddCookiesInterceptor())
                 .build();
 
-        Gson gson = new GsonBuilder()
-                //.registerTypeAdapter(Voting.class, new Deserializer<Voting>("voting"))
-                //.registerTypeAdapter(Holding.class, new Deserializer<Holding>("holding"))
-                .registerTypeAdapter(CollegialBody.class, new Deserializer<CollegialBody>("collegialBody"))
-                //.registerTypeAdapter(Head.class, new Deserializer<Head>("head"))
-                //.registerTypeAdapter(Secretary.class, new Deserializer<Secretary>("secretary"))
-                //.registerTypeAdapter(Participant.class, new Deserializer<List<Participant>>("participant"))
-                //.registerTypeAdapter(Agenda.class, new Deserializer<List<Agenda>>("agenda"))
-                .create();
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://senat.azurewebsites.net/")
                 .client(okHttpClient)

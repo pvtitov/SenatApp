@@ -16,7 +16,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import ru.github.pvtitov.senatapp.App;
 import ru.github.pvtitov.senatapp.R;
+import ru.github.pvtitov.senatapp.dagger.DaggerAppComponent;
+import ru.github.pvtitov.senatapp.mvp.MainMvpContract;
 import ru.github.pvtitov.senatapp.pojos.Item;
 import ru.github.pvtitov.senatapp.pojos.Meetings;
 
@@ -62,7 +65,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         }
         if (item.getCollegialBody() != null) viewHolder.collegialBody.setText(item.getCollegialBody().getName());
         viewHolder.status.setText(item.getStatus());
-        viewHolder.container.setOnClickListener(view -> MainPresenterImpl.getInstance().itemClicked(item.getId()));
+        viewHolder.container.setOnClickListener(view -> {
+            MainMvpContract.MainPresenter presenter = App.getComponent().mainPresenter();
+            presenter.itemClicked(item.getId());
+        });
     }
 
     @Override

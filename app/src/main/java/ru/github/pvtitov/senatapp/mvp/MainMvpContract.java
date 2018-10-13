@@ -1,5 +1,6 @@
 package ru.github.pvtitov.senatapp.mvp;
 
+import ru.github.pvtitov.senatapp.http_service.HttpClient;
 import ru.github.pvtitov.senatapp.main.MeetingAdapter;
 import ru.github.pvtitov.senatapp.mvp.MvpContract;
 import ru.github.pvtitov.senatapp.pojos.Meeting;
@@ -16,6 +17,7 @@ public interface MainMvpContract {
     interface MainModel extends MvpContract.Model {
         void downloadMeetings();
         void downloadSingleMeeting(String id);
+        void setHttpResponseListener(HttpClient.HttpResponseListener listener);
     }
 
     interface MainView extends MvpContract.View {
