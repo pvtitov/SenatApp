@@ -8,188 +8,269 @@
     android:layout_height="match_parent"
     android:layout_margin="6dp">
 
-    <GridLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:columnCount="2">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/details_date_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:text="Дата"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/meetings_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/details_date_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
+            <TextView
+                android:id="@+id/details_date_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Дата"
+                app:layout_constraintBottom_toTopOf="@id/details_date_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/details_status_name"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Статус"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/details_date_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toTopOf="@id/details_status_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_date_name"
+                tools:text="ДАТА" />
 
-        <TextView
-            android:id="@+id/details_status_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
+            <TextView
+                android:id="@+id/details_status_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Статус"
+                app:layout_constraintBottom_toTopOf="@id/details_status_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_date_value" />
 
-        <TextView
-            android:id="@+id/details_collegial_body_name"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Коллегиальный орган"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/details_status_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toTopOf="@id/details_collegial_body_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_status_name"
+                tools:text="СТАТУС" />
 
-
-        <TextView
-            android:id="@+id/details_collegial_body_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
-
-        <TextView
-            android:id="@+id/details_address_name"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Адрес"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
-
-
-        <TextView
-            android:id="@+id/details_address_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
-
-        <TextView
-            android:id="@+id/details_head_name"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Председатель"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/details_collegial_body_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Коллегиальный орган"
+                app:layout_constraintBottom_toTopOf="@id/details_collegial_body_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_status_value" />
 
 
-        <TextView
-            android:id="@+id/details_head_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
+            <TextView
+                android:id="@+id/details_collegial_body_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toTopOf="@id/details_address_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_collegial_body_name"
+                tools:text="КОЛЛЕГИАЛЬНЫЙ ОРГАН" />
 
-        <TextView
-            android:id="@+id/details_secretary_name"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Секретарь"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
-
-
-        <TextView
-            android:id="@+id/details_secretary_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
-
-        <TextView
-            android:id="@+id/details_agenda_name"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Повестка"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/details_address_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Адрес"
+                app:layout_constraintBottom_toTopOf="@id/details_address_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_collegial_body_value" />
 
 
-        <TextView
-            android:id="@+id/details_agenda_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
+            <TextView
+                android:id="@+id/details_address_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toTopOf="@id/details_head_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_address_name"
+                tools:text="АДРЕС" />
 
-        <TextView
-            android:id="@+id/details_participants_name"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Участники"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp" />
+            <TextView
+                android:id="@+id/details_head_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Председатель"
+                app:layout_constraintBottom_toTopOf="@id/details_head_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_address_value" />
 
 
-        <TextView
-            android:id="@+id/details_participants_value"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp" />
+            <TextView
+                android:id="@+id/details_head_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toTopOf="@id/details_secretary_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_head_name"
+                tools:text="ПРЕДСЕДАТЕЛЬ" />
 
-    </GridLayout>
+            <TextView
+                android:id="@+id/details_secretary_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Секретарь"
+                app:layout_constraintBottom_toTopOf="@id/details_secretary_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_head_value" />
+
+
+            <TextView
+                android:id="@+id/details_secretary_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toTopOf="@id/details_agenda_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_secretary_name"
+                tools:text="СЕКРЕТАРЬ" />
+
+            <TextView
+                android:id="@+id/details_agenda_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="На повестке"
+                app:layout_constraintBottom_toTopOf="@id/details_agenda_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_secretary_value" />
+
+
+            <TextView
+                android:id="@+id/details_agenda_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintBottom_toTopOf="@id/details_participants_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_agenda_name"
+                tools:text="НА ПОВЕСТКЕ" />
+
+            <TextView
+                android:id="@+id/details_participants_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Участники"
+                app:layout_constraintBottom_toTopOf="@id/details_participants_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_agenda_value" />
+
+
+            <TextView
+                android:id="@+id/details_participants_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_participants_name"
+                tools:text="УЧАСТНИКИ" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
 
 </android.support.v7.widget.CardView>

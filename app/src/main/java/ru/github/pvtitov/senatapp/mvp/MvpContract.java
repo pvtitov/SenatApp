@@ -16,7 +16,5 @@ public interface MvpContract {
         void attachView(V view);
         void detachView();
         V getView();
-        void setModel(M model);
-        M getModel();
     }
 }

@@ -12,7 +12,8 @@ import static ru.github.pvtitov.senatapp.mvp.LoginMvpContract.LoginModel.*;
 
 public class LoginPresenterImpl extends BasicPresenter<LoginView, LoginModel> implements LoginPresenter, AuthListener {
 
-    @Inject LoginModelImpl model;
+    @Inject
+    public LoginModelImpl model;
 
     public LoginPresenterImpl() {
         model = App.getComponent().loginModel();
