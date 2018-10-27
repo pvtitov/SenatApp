@@ -65,11 +65,10 @@ public class DetailMeetingFragment extends Fragment {
                 Date millis = format.parse(meeting.getDate());
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(millis);
-                String[] months = {"января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"};
                 StringBuilder dataText = new StringBuilder()
                         .append(calendar.get(Calendar.DAY_OF_MONTH))
                         .append(" ")
-                        .append(months[calendar.get(Calendar.MONTH)])
+                        .append(MonthNameKt.monthNameOf(calendar.get(Calendar.MONTH)))
                         .append(" ")
                         .append(calendar.get(Calendar.YEAR));
                 dateTextView.setText(dataText);

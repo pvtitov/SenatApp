@@ -1,12 +1,10 @@
 package ru.github.pvtitov.senatapp.main;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -50,11 +48,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
                 Date millis = format.parse(item.getDate());
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(millis);
-                String[] months = {"января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"};
                 StringBuilder dataText = new StringBuilder()
                         .append(calendar.get(Calendar.DAY_OF_MONTH))
                         .append(" ")
-                        .append(months[calendar.get(Calendar.MONTH)])
+                        .append(MonthNameKt.monthNameOf(calendar.get(Calendar.MONTH)))
                         .append(" ")
                         .append(calendar.get(Calendar.YEAR));
                 viewHolder.date.setText(dataText);
